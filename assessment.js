@@ -1,5 +1,5 @@
-(function () {
-    'use strict';
+ (function () {
+  'use strict';
      const userNameInput = document.getElementById('user-name');
      const assessmentButton = document.getElementById('assessment');
      const resultDivided = document.getElementById('result-area');
@@ -18,10 +18,12 @@
          const userName = userNameInput.value;
          if (userName.length === 0){ // 名前が空の時は処理を終了する
         return;
-         }
-         
+        }
+          console.log(userName);
           // TODO 診断結果表示エリアの作成
-          removeAllChidren(resultDivided);
+          while (resultDivided.firstChild) { // 子どもの要素があるかぎり削除
+              resultDivided.removeChild(resultDivided.firstChild);
+            }
            const header = document.createElement('h3');
     header.innerText = '診断結果';
     resultDivided.appendChild(header);
@@ -67,7 +69,7 @@
         '{userName}のいいところは気配りです。{userName}の配慮が多くの人を救っています。',
         '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
         '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。',
-        '{userName}のいいところは優しさです。{userName}の優しい雰囲気や立ち振舞に多くの人が癒されています。',
+        '{userName}のいいところは優しさです。あなたの優しい雰囲気や立ち振舞に多くの人が癒されています。
     ];
 
     /**
@@ -91,7 +93,7 @@
     }
 
     // テストコード
-     console.assert(
+    console.assert(
         assessment('太郎') === '太郎のいいところは決断力です。太郎がする決断にいつも助けられる人がいます。',
         '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
     );
