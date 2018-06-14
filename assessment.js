@@ -18,12 +18,10 @@
          const userName = userNameInput.value;
          if (userName.length === 0){ // 名前が空の時は処理を終了する
         return;
-        }
-          console.log(userName);
+         }
+         
           // TODO 診断結果表示エリアの作成
-          while (resultDivided.firstChild) { // 子どもの要素があるかぎり削除
-              resultDivided.removeChild(resultDivided.firstChild);
-            }
+          removeAllChidren(resultDivided);
            const header = document.createElement('h3');
     header.innerText = '診断結果';
     resultDivided.appendChild(header);
