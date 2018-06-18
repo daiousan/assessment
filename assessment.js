@@ -1,56 +1,51 @@
- (function () {
-      'use strict';
+(function () {
+    'use strict';
      const userNameInput = document.getElementById('user-name');
      const assessmentButton = document.getElementById('assessment');
      const resultDivided = document.getElementById('result-area');
      const tweetDivided = document.getElementById('tweet-area');
 
       /**
-    * 指定した要素の子どもを全て削除する
+    * 指定した要素の子どもを全て除去する
     * @param {HTMLElement} element HTMLの要素
     */
     function removeAllChildren(element) {
-        while (element.firstChild) { // 子どもの要素があるかぎり削除
+        while (element.firstChild) { // 子どもの要素があるかぎり除去
             element.removeChild(element.firstChild);
         }
     }
      assessmentButton.onclick = () => {
          const userName = userNameInput.value;
          if (userName.length === 0){ // 名前が空の時は処理を終了する
-        return;
+        　　return;
         }
-          console.log(userName);
-          // TODO 診断結果表示エリアの作成
-          while (resultDivided.firstChild) { // 子どもの要素があるかぎり削除
-              resultDivided.removeChild(resultDivided.firstChild);
-            }
-           const header = document.createElement('h3');
-    header.innerText = '診断結果';
-    resultDivided.appendChild(header);
 
-    const paragraph = document.createElement('p');
-    const result = assessment(userName);
-    paragraph.innerText = result;
-    resultDivided.appendChild(paragraph);
+        // 診断結果表示エリアの作成
+        removeAllChildren(resultDivided);
+        const header = document.createElement('h3');
+        header.innerText = '診断結果';
+        resultDivided.appendChild(header);
 
-    // TODO ツイートエリアの作成
-    removeAllChildren(tweetDivided);
-    const anchor = document.createElement('a');
-    const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag=%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E3%81%84%E3%81%84%E3%81%A8%E3%81%93%E3%82%8D&text='
-    + encodeURIComponent(result);
+        const paragraph = document.createElement('p');
+        const result = assessment(userName);
+        paragraph.innerText = result;
+        resultDivided.appendChild(paragraph);
 
-    anchor.setAttribute('href', hrefValue);
-    anchor.className ='teitter-hashag-button';
-    anchor.innerText = 'Tweet #%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E3%81%84%E3%81%84%E3%81%A8%E3%81%93%E3%82%8D';
-    tweetDivided.appendChild(anchor);
+        // ツイートエリアの作成
+        removeAllChildren(tweetDivided);
+        const anchor = document.createElement('a');
+        const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag=あなたのいいところ&ref_src=twsrc%5Etfw';
+            + encodeURIComponent('あなたのいいところ')
+            + '&ref_src=twsrc%5Etfw';  
+        anchor.setAttribute('href', hrefValue);
+        anchor.className ='teitter-hashag-button';
+        anchor.setAttribute('data-text', result);
+        anchor.innerText = 'Tweet #あなたのいいところ';
+        tweetDivided.appendChild(anchor);
+        
 
-    twttr.widgets.load();
+        twttr.widgets.load();
 };
- userNameInput.onkeydown = (event) => {
-        if (event.keyCode === 13) {
-            assessmentButton.onclick();
-        }
-    };
 
     const answers = [
         '{userName}のいいところは声です。{userName}の特徴的な声はみなを惹きつけ、心に残ります。',
@@ -68,8 +63,9 @@
         '{userName}のいいところは好奇心です。新しいことに向かっていく{userName}の心構えが多くの人に魅力的に映ります。',
         '{userName}のいいところは気配りです。{userName}の配慮が多くの人を救っています。',
         '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
-        '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。',
+        '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。'
         '{userName}のいいところは優しさです。あなたの優しい雰囲気や立ち振舞に多くの人が癒されています。'
+　　　　
     ];
 
     /**
