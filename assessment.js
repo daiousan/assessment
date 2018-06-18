@@ -14,9 +14,10 @@
             element.removeChild(element.firstChild);
         }
     }
+
      assessmentButton.onclick = () => {
          const userName = userNameInput.value;
-         if (userName.length === 0){ // 名前が空の時は処理を終了する
+         if (userName.length === 0) { // 名前が空の時は処理を終了する
         　　return;
         }
 
@@ -34,11 +35,11 @@
         // ツイートエリアの作成
         removeAllChildren(tweetDivided);
         const anchor = document.createElement('a');
-        const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag=あなたのいいところ&ref_src=twsrc%5Etfw';
+        const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag='
             + encodeURIComponent('あなたのいいところ')
-            + '&ref_src=twsrc%5Etfw';  
+            + '&ref_src=twsrc%5Etfw';   
         anchor.setAttribute('href', hrefValue);
-        anchor.className ='teitter-hashag-button';
+        anchor.className = 'twitter-hashtag-button';
         anchor.setAttribute('data-text', result);
         anchor.innerText = 'Tweet #あなたのいいところ';
         tweetDivided.appendChild(anchor);
@@ -64,8 +65,6 @@
         '{userName}のいいところは気配りです。{userName}の配慮が多くの人を救っています。',
         '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
         '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。'
-        '{userName}のいいところは優しさです。あなたの優しい雰囲気や立ち振舞に多くの人が癒されています。'
-　　　　
     ];
 
     /**
